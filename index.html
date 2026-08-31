@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คู่มือท่องเที่ยวและพิกัด GPS จังหวัดสตูล (Satun Tourism GPS)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #0f766e;
+            --primary-hover: #0d9488;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 40px;
+        }
+
+        /* Header Header Section */
+        header {
+            background: linear-gradient(135deg, #0f766e 0%, #042f2e 100%);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* Container & Search */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .search-container {
+            margin: -25px auto 30px auto;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 16px 20px 16px 50px;
+            border: none;
+            border-radius: 30px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-container input:focus {
+            box-shadow: 0 10px 20px -3px rgba(15, 118, 110, 0.25);
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+
+        /* Cards Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            padding: 20px 20px 10px 20px;
+        }
+
+        .tag-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .badge {
+            background-color: #ccfbf1;
+            color: var(--primary-color);
+            font-size: 0.8rem;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .rating {
+            font-size: 0.9rem;
+            color: #f59e0b;
+            font-weight: 500;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .district-text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .card-body {
+            padding: 10px 20px 20px 20px;
+            flex-grow: 1;
+        }
+
+        .highlight-text {
+            font-size: 0.95rem;
+            color: #475569;
+            margin-bottom: 15px;
+        }
+
+        .gps-box {
+            background-color: #f1f5f9;
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .gps-coords {
+            font-family: monospace;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .btn-copy {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            padding: 4px;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .btn-copy:hover {
+            color: var(--primary-hover);
+        }
+
+        /* Buttons */
+        .btn-map {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            padding: 12px 0;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-map:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-map i {
+            margin-right: 6px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Toast Alert */
+        #toast {
+            visibility: hidden;
+            min-width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 20px;
+            padding: 10px;
+            position: fixed;
+            z-index: 99;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+        }
+
+        #toast.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><i class="fa-solid fa-compass-drafting"></i> เที่ยวสตูล GPS Guide</h1>
+        <p>รวมพิกัดนำทางสถานที่ท่องเที่ยวเด่น จังหวัดสตูล (UNESCO Global Geopark)</p>
+    </header>
+
+    <div class="container">
+        <div class="search-container">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="ค้นหาชื่อสถานที่, อำเภอ หรือหมวดหมู่..." onkeyup="filterPlaces()">
+        </div>
+
+        <div class="grid" id="placesGrid">
+            </div>
+
+        <footer>
+            <p>© 2026 คู่มือสถานที่ท่องเที่ยวและพิกัด GPS จังหวัดสตูล</p>
+        </footer>
+    </div>
+
+    <div id="toast">คัดลอกพิกัดเรียบร้อยแล้ว!</div>
+
+    <script>
+        // Data Places Dataset
+        const places = [
+            {
+                id: "STL-001",
+                name: "เกาะหลีเป๊ะ (Lipe Island)",
+                category: "ทะเลและเกาะ",
+                district: "อำเภอเมืองสตูล",
+                lat: 6.4886,
+                lng: 99.3039,
+                mapUrl: "https://maps.google.com/?q=6.4886,99.3039",
+                highlight: "หาดทรายขาวละเอียด น้ำทะเลใส ดำน้ำชมปะการัง หาดพัทยา หาดซันไรส์ และหาดซันเซ็ท",
+                rating: 4.8
+            },
+            {
+                id: "STL-002",
+                name: "อุทยานแห่งชาติหมู่เกาะเภตรา",
+                category: "อุทยานแห่งชาติ / ธรรมชาติ",
+                district: "อำเภอละงู",
+                lat: 6.8402,
+                lng: 99.7431,
+                mapUrl: "https://maps.google.com/?q=6.8402,99.7431",
+                highlight: "เขาปราสาทหินพันยอด สะพานข้ามกาลเวลา เส้นทางเดินศึกษาธรรมชาติฟอสซิลยุคโบราณ",
+                rating: 4.6
+            },
+            {
+                id: "STL-003",
+                name: "ถ้ำภูผาเพชร",
+                category: "ถ้ำ / ป่าเขา",
+                district: "อำเภอมะนัง",
+                lat: 7.1265,
+                lng: 100.0214,
+                mapUrl: "https://maps.google.com/?q=7.1265,100.0214",
+                highlight: "ถ้ำขนาดใหญ่อันดับ 4 ของโลก หินงอกหินย้อยประกายระยิบระยับ และห้องโถงมรกต",
+                rating: 4.7
+            },
+            {
+                id: "STL-004",
+                name: "ถ้ำเลสเตโกดอน",
+                category: "Geopark (อุทยานธรณี)",
+                district: "อำเภอทุ่งหว้า",
+                lat: 7.1068,
+                lng: 99.7825,
+                mapUrl: "https://maps.google.com/?q=7.1068,99.7825",
+                highlight: "ถ้ำน้ำลอดความยาวกว่า 4 กิโลเมตร พายเรือแคนูชมความงามของชั้นหินและซากฟอสซิลช้างโบราณ",
+                rating: 4.7
+            },
+            {
+                id: "STL-005",
+                name: "เกาะไข่",
+                category: "ทะเลและเกาะ",
+                district: "อำเภอเมืองสตูล",
+                lat: 6.6617,
+                lng: 99.4144,
+                mapUrl: "https://maps.google.com/?q=6.6617,99.4144",
+                highlight: "ซุ้มประตูหินธรรมชาติ สัญลักษณ์อันโดดเด่นของการท่องเที่ยวจังหวัดสตูล",
+                rating: 4.5
+            },
+            {
+                id: "STL-006",
+                name: "น้ำตกวังสายทอง",
+                category: "น้ำตก / กิจกรรมผจญภัย",
+                district: "อำเภอละงู",
+                lat: 7.0863,
+                lng: 99.9076,
+                mapUrl: "https://maps.google.com/?q=7.0863,99.9076",
+                highlight: "น้ำตกหินปูนชั้นหินสีทอง ไม่ลื่น และกิจกรรมล่องแก่งเรือยางลำน้ำอุได",
+                rating: 4.6
+            },
+            {
+                id: "STL-007",
+                name: "หาดสันหลังมังกร",
+                category: "ทะเลและเกาะ",
+                district: "อำเภอเมืองสตูล",
+                lat: 6.6433,
+                lng: 99.9572,
+                mapUrl: "https://maps.google.com/?q=6.6433,99.9572",
+                highlight: "สันทรายเปลือกหอยโผล่พ้นน้ำคดเคี้ยวยาวกว่า 3 กิโลเมตร มหัศจรรย์ยามน้ำลด",
+                rating: 4.4
+            },
+            {
+                id: "STL-008",
+                name: "อุทยานแห่งชาติตะรุเตา",
+                category: "ทะเลและประวัติศาสตร์",
+                district: "อำเภอเมืองสตูล",
+                lat: 6.6061,
+                lng: 99.6582,
+                mapUrl: "https://maps.google.com/?q=6.6061,99.6582",
+                highlight: "อ่าวมะละกอ อ่าวตะโล๊ะวาว เรียนรู้เรื่องราวประวัติศาสตร์คุกตะรุเตาในอดีต",
+                rating: 4.6
+            }
+        ];
+
+        // Render Cards
+        function renderCards(data) {
+            const grid = document.getElementById('placesGrid');
+            grid.innerHTML = '';
+
+            if(data.length === 0) {
+                grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-muted);">ไม่พบข้อมูลสถานที่ท่องเที่ยวที่คุณค้นหา</div>`;
+                return;
+            }
+
+            data.forEach(place => {
+                const cardHtml = `
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="tag-row">
+                                <span class="badge">${place.category}</span>
+                                <span class="rating"><i class="fa-solid fa-star"></i> ${place.rating}</span>
+                            </div>
+                            <h2 class="card-title">${place.name}</h2>
+                            <div class="district-text"><i class="fa-solid fa-location-dot"></i> ${place.district}</div>
+                        </div>
+                        <div class="card-body">
+                            <p class="highlight-text">${place.highlight}</p>
+                            <div class="gps-box">
+                                <div>
+                                    <i class="fa-solid fa-crosshairs"></i> 
+                                    <span class="gps-coords">${place.lat}, ${place.lng}</span>
+                                </div>
+                                <button class="btn-copy" onclick="copyGPS('${place.lat}, ${place.lng}')" title="คัดลอกพิกัด">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+                            <a href="${place.mapUrl}" target="_blank" class="btn-map">
+                                <i class="fa-solid fa-map-location-dot"></i> นำทางด้วย Google Maps
+                            </a>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += cardHtml;
+            });
+        }
+
+        // Search Filter function
+        function filterPlaces() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = places.filter(place => 
+                place.name.toLowerCase().includes(query) ||
+                place.district.toLowerCase().includes(query) ||
+                place.category.toLowerCase().includes(query) ||
+                place.highlight.toLowerCase().includes(query)
+            );
+            renderCards(filtered);
+        }
+
+        // Copy GPS to Clipboard
+        function copyGPS(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById("toast");
+                toast.className = "show";
+                setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+            });
+        }
+
+        // Initial Load
+        renderCards(places);
+    </script>
+</body>
+</html>
